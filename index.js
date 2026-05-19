@@ -28,19 +28,23 @@ app.get("/",(req,res)=>{
     res.send("server is running")
 })
 
-app.use("/api/auth", authRouter)
-app.use('/api/eployees',emploeesRouter)
-app.use('/api/attendence',attendenceRouter)
-app.use('/api/leave',leaveRouter)
-app.use('/api/payslip',payslipRouter)
-
-app.use("/api/inngest", serve({ client: inngest, functions }));
 
 app.use((req,res,next)=>{
   console.log(req.method,req.url);
   next()
   
 })
+
+
+app.use("/api/auth", authRouter)
+app.use('/api/employees',emploeesRouter)
+app.use('/api/attendence',attendenceRouter)
+app.use('/api/leave',leaveRouter)
+app.use('/api/payslip',payslipRouter)
+
+app.use("/api/inngest", serve({ client: inngest, functions }));
+
+
 
 
 // server running ( listen )

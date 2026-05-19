@@ -17,17 +17,6 @@ const employeeSchema = new mongoose.Schema({
                 bio:{ type: Boolean, default: "" },
                                 bio:{ type: String, enum: "" },
 
-
-
-
-
-
-
-
-
-
-
-
     role: { type: String, enum: ["Admin", "Employee"], default: "Employee" },
 
 

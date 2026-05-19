@@ -25,7 +25,7 @@ export const getEmployees = async (req,res)=>{
 export const createEmployees = async (req,res)=>{
    try {
     const {firstName,lastName,email,phone,position,department,basicSalary,allowances,deduction,joinDate,password,role,bio}= req.body
-    if(!email || !password || !firstName || !lastName){
+    if(!email || !password || !firstName || !lastName || !position || !phone || !joinDate || !department ){
       return  res.status(400).json({err :"Missing Required Fields"})
     }
        const hashed = await bcrypt.hash(password,10)
