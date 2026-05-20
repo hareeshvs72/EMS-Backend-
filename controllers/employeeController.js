@@ -8,13 +8,17 @@ import users from '../models/user.js'
 export const getEmployees = async (req,res)=>{
   try {
      const {department} = req.query
-     const where ={}
+     const where ={ isDeleted: { $ne: true }}
      if(department){
         where.department = department
      }
-     const employee = await employees.find(where).toSorted({createdAt:-1}).populate("userId", "email role").lean() 
+     const employee = await employees.find(where).sort({createdAt:-1}).populate("userId", "email role").lean() 
+     console.log(employee);
+     
      res.json(employee)
   } catch (error) {
+   console.log(error);
+   
     res.status(500).json({err:"Failed To Fetch Employees", error})
   }
 }
