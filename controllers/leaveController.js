@@ -10,7 +10,7 @@ import { session } from "./authController.js"
 export const createLeaves = async (req,res) => {
 
     try {
-        const session = req.session
+        const session = req.payload
         const employee =  await employees.findOne({userId:session.userId})
          if(!employee){
             return res.status(404).json({error:"Employee not found"})
@@ -47,16 +47,18 @@ export const createLeaves = async (req,res) => {
         })
         return res.json({success:true,data:leave })
     } catch (error) {
+        console.log(error);
+        
         res.status(500).json({error:"Failed"})
     }
     
 }
 
 // get leaves
-// get /api/leaves
+// get /api/leave
 export const getLeaves = async (req,res) => {
  try {
-            const session = req.session
+            const session = req.payload
      const isAdmin =  session.role === "Admin"
      if(isAdmin){
       const status = req.query.status
@@ -93,18 +95,23 @@ export const getLeaves = async (req,res) => {
 }
 
 // update leave status
-// Patch /api/leaves/:id
+// Patch /api/leave/:id
 
 export const updateLeaveStatus = async (req,res) => {
     try {
+        console.log(req.body);
+        
         const {status} = req.body
         if(!["Pending","Approved" ,"Rejected"].includes(status)){
             return res.status(400).json({error:"Invalid status"})
         }
 
-        const leave = await leaveApllications.findByIdAndUpdate(req.params.id,{status},{returnDocumnet:"after"})
+        const leave = await leaveApllications.findByIdAndUpdate(req.params.id,{Status:status},{returnDocument: "after"} )
         return res.json({success:true,data:leave})
-        
+
+            if (!leave) {
+            return res.status(404).json({ error: "Leave not found" });
+        }
     } catch (error) {
                    res.status(500).json({error:"Failed"})
 console.log(error);
