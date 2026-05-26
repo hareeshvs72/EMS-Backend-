@@ -9,6 +9,7 @@ import payslips from "../models/paySlip.js"
 export const createPayslip = async (req,res) => {
     try {
         const { employeeId ,month ,year ,basicSalary,allowances,deduction} = req.body
+console.log(req.body);
 
     if(!month || !basicSalary || !year || !employeeId){
         return res.status(400).json({error:"Missing fields"})
@@ -27,6 +28,8 @@ export const createPayslip = async (req,res) => {
    })
    return res.json({success:true , data : payslip})
     } catch (error) {
+        console.log(error);
+        
        return res.status(500).json({error:"Failed"}) 
     }
 
@@ -38,7 +41,7 @@ export const createPayslip = async (req,res) => {
 
 export const getPayslips = async (req,res) => {
     try {
-        const session = req.session
+        const session = req.payload
         const isAdmin = session.role === "Admin"
 
         if(isAdmin){
@@ -51,10 +54,12 @@ export const getPayslips = async (req,res) => {
                 return res.status(404).json({error:"Not Found"})
             }
             const payslip = await payslips.find({employeeId:employee._id}).sort({createdAt:-1})
-            return res.json({dtat:payslip})
+            return res.json({data:payslip})
 
          }
     } catch (error) {
+        console.log(error);
+        
                return res.status(500).json({error:"Failed"}) 
 
     }

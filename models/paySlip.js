@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { type } from "node:os";
 
 const payslipSchema = new mongoose.Schema({
-    employeeId: { type: mongoose.Schema.Types.ObjectId, ref: "employee", required: true, },
+    employeeId: { type: mongoose.Schema.Types.ObjectId, ref: "employees", required: true, },
     month: { type: Number, required: true },
 
     year: { type: Number, required: true },

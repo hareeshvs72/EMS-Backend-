@@ -40,7 +40,7 @@ app.use("/api/auth", authRouter)
 app.use('/api/employees',emploeesRouter)
 app.use('/api/attendence',attendenceRouter)
 app.use('/api/leave',leaveRouter)
-app.use('/api/payslip',payslipRouter)
+app.use('/api/payslips',payslipRouter)
 
 app.use("/api/inngest", serve({ client: inngest, functions }));
 
