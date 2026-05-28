@@ -16,8 +16,8 @@ const employeeSchema = new mongoose.Schema({
         employeeStatus: { type: String, enum:["Active","Inactive"], default: "Active" },
             joinDate: { type: Date, required: true },
                 isDeleted: { type: Boolean, default: false },
-                bio:{ type: Boolean, default: "" },
-                                bio:{ type: String, enum: "" },
+                bio:{ type: String, default: "" },
+                             
 
     role: { type: String, enum: ["Admin", "Employee"], default: "Employee" },
 

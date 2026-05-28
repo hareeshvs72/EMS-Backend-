@@ -10,6 +10,8 @@ import leaveRouter from './routes/leaveRoute.js'
 import payslipRouter from './routes/payslipRouter.js'
 import { serve } from "inngest/express";
 import { inngest, functions } from "./inngest/index.js"
+import dashbordRouter from './routes/dashboardRoute.js'
+import profileRouter from './routes/profileRoute.js'
 const app = express()
 
 
@@ -41,6 +43,9 @@ app.use('/api/employees',emploeesRouter)
 app.use('/api/attendence',attendenceRouter)
 app.use('/api/leave',leaveRouter)
 app.use('/api/payslips',payslipRouter)
+app.use('/api/dashboard',dashbordRouter)
+app.use('/api/profile',profileRouter)
+
 
 app.use("/api/inngest", serve({ client: inngest, functions }));
 
