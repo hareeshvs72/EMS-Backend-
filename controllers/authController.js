@@ -77,12 +77,14 @@ export const session = async (req , res ) =>{
 }
 
 // chnage password for employee and admin 
-// post /api/auth/change-password
+// put /api/auth/change-password
 
 export const changePassword = async (req, res) =>{
     try {
         const session = req.payload
         const {currentPassword,newPassword} = req.body
+        console.log(currentPassword,newPassword);
+        
         if(!currentPassword || !newPassword){
                      return   res.status(400).json({error:"Both password are required"})
 
